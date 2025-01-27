@@ -1,0 +1,13 @@
+;Author: Bhumika Basnet
+(defparameter *list1* '(a b x d))
+(defparameter *list2* '(a (b (x d))))
+(defparameter *list3* '((( a (b (x) d)))))
+(print (caddr *list1*))  
+(print (car(car (cdr (car (cdr *list2*))))))     
+(print (car(car(cdr(car(cdr(car(car *list3*))))))))  
+(defparameter *list1-cons* (cons 'a (cons 'b (cons 'x (cons 'd nil)))))
+(print *list1-cons*)  
+(defparameter *list2-cons* (cons 'a (cons (cons 'b (cons (cons 'x (cons 'd nil)) nil)) nil)))
+(print *list2-cons*) 
+(defparameter *list3-cons* (cons (cons (cons 'a (cons (cons 'b (cons (cons 'x nil) (cons 'd nil))) nil)) nil) nil))
+(print *list3-cons*)  
