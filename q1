@@ -1,0 +1,103 @@
+Script started on 2025-02-04 20:20:49+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="151" LINES="14"]
+[0;32m@Bhumika7 [0m➜ [1;34m/workspaces/csci-330-homeworks-Bhumika7 [0;36m([1;31mmain[0;36m) [0m$ sbcl
+This is SBCL 2.0.1.debian, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* ; Q 3.1 : Evaluates to NIL because 3 is equal to the absolute value of -3
+(print (NOT (EQUAL 3 (ABS -3))))
+
+NIL 
+NIL
+* ; Q 3.2 : Compute (8 + 12) / 2 using EVAL notation
+(print (/ (+ 8 12) 2))
+
+10 
+10
+* ; Q 3.3 : Compute the sum of squares of 3 and 4
+(print (+ (* 3 3) (* 4 4)))
+
+25 
+25
+* ; Q 3.7 : Define a function MILES-PER-GALLON to calculate fuel efficiency
+(defun MILES-PER-GALLON (INITIAL-ODOMETER-READING FINAL-ODOMETER-READING GALLONS-CONSUMED)
+  (/ (- FINAL-ODOMETER-READING INITIAL-ODOMETER-READING) GALLONS-CONSUMED)
+)
+MILES-PER-GALLON
+* ; Testing MILES-PER-GALLON function
+(print (MILES-PER-GALLON 1000 2000 50)) ; Expected output: 20 (miles per gallon)
+
+20 
+20
+* ; 3.10 : Fixing syntax issues in expressions
+; (third (the quick brown fox)) - Incorrect because 'the quick brown fox' needs to be quoted
+(third '(the quick brown fox))
+BROWN
+* ; (list 2 and 2 is 4) - Incorrect since 'and' is unquoted and treated as a variable
+(list 2 'and 2 'is 4)
+(2 AND 2 IS 4)
+* ; (+ 1 ’(length (list t t t t))) - Incorrect due to misplaced quote
+(+ 1 (length '(t t t t)))
+5
+* ; (cons ’patrick (seymour marvin)) - Incorrect because 'seymour' and 'marvin' are unquoted
+(cons 'patrick '(seymour marvin))
+(PATRICK SEYMOUR MARVIN)
+* ; (cons ’patrick (list seymour marvin)) - Incorrect because 'seymour' and 'marvin' need to be quoted
+(cons 'patrick (list 'seymour 'marvin))
+(PATRICK SEYMOUR MARVIN)
+* ; 3.20 : Defining a function that swaps the first two elements of a list
+(defun mystery (x)
+    (list (second x) (first x)))
+MYSTERY
+* ; Testing the mystery function
+(print (mystery '(dancing bear))) ; Expected output: (BEAR DANCING)
+
+(BEAR DANCING) 
+(BEAR DANCING)
+* ;(print(mystery ’dancing ’bear))  ; Error: 'DANCING' is unbound
+(print (mystery '(zowie)))  ; Expected output: (NIL ZOWIE)
+
+(NIL ZOWIE) 
+(NIL ZOWIE)
+* ;(print (mystery (list ’first ’second)) ) ; Error: 'FIRST' is unbound
+
+; 3.21 : Define a function that constructs a sentence
+(defun speak (x y) (list 'all x 'is y))
+SPEAK
+* ; Common mistakes in function definitions:
+; (defun speak (x y) (list ’all ’x ’is ’y)) - Quoting 'x' and 'y' inside list is unnecessary
+; (defun speak (x) (y) (list ’all x ’is y)) - Incorrect function syntax
+; (defun speak ((x) (y)) (list all ’x is ’y)) - Incorrect parameter structure
+; 3.25 : Evaluating different Lisp expressions
+(print (list 'cons t nil)) ; Output: (CONS T NIL)
+(pr
+(CONS T NIL) 
+(CONS T NIL)
+* int (eval (list 'cons t nil))) ; Output: (T)
+
+(T) 
+(T)
+* ;(print (eval (eval (list 'cons t nil)))) ; Error: T is undefined
+(print (apply #'cons '(t nil))) ; Output: (T)
+(print (eval nil)) ; Output: NIL
+(prin
+(T) 
+(T)
+* 
+NIL 
+NIL
+* t (list 'eval nil)) ; Output: (EVAL NIL)
+(print (e
+(EVAL NIL) 
+(EVAL NIL)
+* val (list 'eval nil))) ; Output: NIL
+
+NIL 
+NIL
+* quit    ()^[[D^[[D^[[D             quit)
+[0;32m@Bhumika7 [0m➜ [1;34m/workspaces/csci-330-homeworks-Bhumika7 [0;36m([1;31mmain[0;36m) [0m$ exit
+
+Script done on 2025-02-04 20:26:02+00:00 [COMMAND_EXIT_CODE="0"]
