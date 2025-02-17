@@ -1,0 +1,59 @@
+Script started on 2025-02-17 22:22:45+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="151" LINES="14"]
+[0;32m@Bhumika7 [0m➜ [1;34m/workspaces/csci-330-homeworks-Bhumika7 [0;36m([1;31mmain[0;36m) [0m$ sbcl
+This is SBCL 2.0.1.debian, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* ;; Function to insert an element into a sorted list.
+(defun insert (x lst)
+  "Inserts element x into the sorted list lst while maintaining order."
+  (cond
+    ;; If the list is empty, insert x as the only element.
+    ((null lst) (list x))
+    
+    ;; If x is smaller than or equal to the first element, place x at the front.
+    ((<= x (first lst)) (cons x lst))
+    
+    ;; Otherwise, keep the first element and insert x recursively into the rest.
+    (t (cons (first lst) (insert x (rest lst))))))
+
+;; Function to sort a list using the insertion sINSERT
+* ort algorithm.
+(defun insertion-sort (lst)
+  "Sorts a list lst using the insertion sort algorithm."
+  (if (null lst)
+      ;; Base case: If the list is empty, return an empty list.
+      '()
+      
+      ;; Recursive case: Sort the rest of the list and insert the first element correctly.
+      (insert (first lst) (insertion-sort (rest lst)))))
+
+;; INSERTION-SORT
+* Testing the insertion sort function
+(format t "~%Sorted List: ~a" (insertion-sort '(4 3 1 6 2 8 5 7))) ;; Expected: (1 2 3 4 5 6 7 8)
+(format t "~%Sor
+Sorted List: (1 2 3 4 5 6 7 8)
+NIL
+* ted List: ~a" (insertion-sort '(9 4 6 2 7 5 3 8 1))) ;; Expected: (1 2 3 4 5 6 7 8 9)
+(format t "~%S
+Sorted List: (1 2 3 4 5 6 7 8 9)
+NIL
+* orted List: ~a" (insertion-sort '(10 9 8 7 6 5 4 3 2 1))) ;; Expected: (1 2 3 4 5 6 7 8 9 10)
+(forma
+Sorted List: (1 2 3 4 5 6 7 8 9 10)
+NIL
+* t t "~%Sorted List: ~a" (insertion-sort '(1))) ;; Expected: (1)
+(format t "~%Sorted List: ~a" (inser
+Sorted List: (1)
+NIL
+* tion-sort '())) ;; Expected: ()
+
+Sorted List: NIL
+NIL
+* (exit)
+[0;32m@Bhumika7 [0m➜ [1;34m/workspaces/csci-330-homeworks-Bhumika7 [0;36m([1;31mmain[0;36m) [0m$ exit
+
+Script done on 2025-02-17 22:24:08+00:00 [COMMAND_EXIT_CODE="0"]

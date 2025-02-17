@@ -1,0 +1,89 @@
+Script started on 2025-02-17 22:16:56+00:00 [TERM="xterm-256color" TTY="/dev/pts/0" COLUMNS="151" LINES="14"]
+[0;32m@Bhumika7 [0m➜ [1;34m/workspaces/csci-330-homeworks-Bhumika7 [0;36m([1;31mmain[0;36m) [0m$ sbcl
+This is SBCL 2.0.1.debian, an implementation of ANSI Common Lisp.
+More information about SBCL is available at <http://www.sbcl.org/>.
+
+SBCL is free software, provided as is, with absolutely no warranty.
+It is mostly in the public domain; some portions are provided under
+BSD-style licenses.  See the CREDITS and COPYING files in the
+distribution for more information.
+* ;; Bottom-Up Mergesort Implementation in Lisp
+;; This implementation follows an iterative approach instead of recursion.
+
+;; Function to merge two sorted lists into a single sorted list.
+(defun merge_list (list1 list2)
+  "Merges two sorted lists into a single sorted list."
+  (cond
+    ;; If one list is empty, return the other.
+    ((null list1) list2)
+    ((null list2) list1)
+    ;; Compare the first elements of both lists.
+    ;; If the first element of list1 is smaller, add it to the merged list
+    ((< (car list1) (car list2))
+     (cons (car list1) (merge_list (cdr list1) list2)))
+    ;; Otherwise, add the first element of list2 to the merged list.
+    (t
+     (cons (car list2) (merge_list list1 (cdr list2))))))
+MERGE_LIST
+* ;; Function to merge adjacent lists in a pass and return a new list of merged lists.
+(defun merge-pass (lists)
+  "Merges adjacent lists in a single pass and returns a new list of merged lists."
+  (cond
+    ;; If there are no lists, return an empty list.
+    ((null lists) '())
+    ;; If there's only one list left, return it as is.
+    ((null (cdr lists)) lists)
+    ;; Merge the first two lists and continue merging the remaining lists.
+    (t
+     (cons (merge_list (car lists) (cadr lists))  ;; Merge first two lists.
+           (merge-pass (cddr lists))))))  ;; Continue merging the rest.
+MERGE-PASS
+* ;; Function to sort a list using the bottom-up merge sort algorithm.
+(defun bottom-up-merge-sort (lst)
+  "Sorts a list using the bottom-up merge sort algorithm."
+  ;; Convert each element into a singleton list.
+  (let ((lists (mapcar #'list lst)))  ;; Example: (1 2 3) → ((1) (2) (3))
+    (loop
+      ;; Merge adjacent lists in each pass.
+      (setq lists (merge-pass lists))
+      ;; If only one sorted list remains, return it.
+      (if (= (length lists) 1)
+          (return (first lists))))))
+BOTTOM-UP-MERGE-SORT
+* ;; Testing the bottom-up merge sort function
+(format t "~%Sorted List: ~a" (bottom-up-merge-sort '(4 3 1 6 2 8 5 7))) ;; Expected: (1 2 3 4 5 6 7 8)
+(
+Sorted List: (1 2 3 4 5 6 7 8)
+NIL
+* format t "~%Sorted List: ~a" (bottom-up-merge-sort '(9 4 6 2 7 5 3 8 1))) ;; Expected: (1 2 3 4 5 6 7 8 9)
+(format t "~%Sorted List: ~a" (bottom-up-me
+Sorted List: (1 2 3 4 5 6 7 8 9)
+NIL
+* rge-sort '(10 9 8 7 6 5 4 3 2 1))) ;; Expected: (1 2 3 4 5 6 7 8 9 10)
+(format t "~%Sorted List: ~a"
+Sorted List: (1 2 3 4 5 6 7 8 9 10)
+NIL
+*  (bottom-up-merge-sort '(1))) ;; Expected: (1)
+(fo
+Sorted List: (1)
+NIL
+* rmat t "~%Sorted List: ~a" (bottom-up-merge-sort '())) ;; Expected: ()
+
+^[[A^[[A        ^[[A^[[A^[[A            (exit)
+
+^C
+debugger invoked on a SB-SYS:INTERACTIVE-INTERRUPT in thread
+#<THREAD "main thread" RUNNING {1000560083}>:
+  Interactive interrupt at #x52101970.
+
+Type HELP for debugger help, or (SB-EXT:EXIT) to exit from SBCL.
+
+restarts (invokable by number or by possibly-abbreviated name):
+  0: [CONTINUE] Return from SB-UNIX:SIGINT.
+  1: [ABORT   ] Exit debugger, returning to top level.
+
+(LENGTH #<unavailable argument>) [external]
+0] (EXIT)
+[0;32m@Bhumika7 [0m➜ [1;34m/workspaces/csci-330-homeworks-Bhumika7 [0;36m([1;31mmain[0;36m) [0m$ exit
+
+Script done on 2025-02-17 22:21:48+00:00 [COMMAND_EXIT_CODE="0"]
